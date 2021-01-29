@@ -34,5 +34,8 @@ Route::get('/',function()
  Route::resource('provinsi',ProvinsiController::class);
 
 
+
+
+
 });
     

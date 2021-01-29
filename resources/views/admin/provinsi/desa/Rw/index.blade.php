@@ -1,6 +1,6 @@
-extends('layouts.admin')
-@push('kota')
-active
+@extends('layouts.admin')
+@push('rw')
+active  
 @endpush
 @section('content')
 <div class="container">
@@ -17,8 +17,8 @@ active
                     @endif
 
                     <div class="card">
-                        <div class="card-header">Kota
-                                <a href="{{route('kota.create')}}" class="float-right btn btn-primary"> Tambah </a>
+                        <div class="card-header">Rw
+                                <a href="{{route('rw.create')}}" class="float-right btn btn-primary"> Tambah </a>
                         </div>   
                             <div class="row">
                                 <div class="col-md-12">
@@ -28,23 +28,24 @@ active
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
-                                                        <th>Nama Provinsi</th>
-                                                        <th>Nama Kota</th>
+                                                        <th>Nama Desa</th>
+                                                        <th>Nama rw</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     
                                                 </thead>
                                                 <tbody>
                                                     @php $no = 1; @endphp
-                                                    @foreach ($kota as $item)
+                                                    @foreach ($rw as $item)
                                                     <tr>
                                                         <th >{{$no++}}</th>
-                                                        <th>{{$item->provinsi->nama_provinsi}}</th>
-                                                        <th>{{$item->nama_kota}}</th>
+                                                        <th>{{$item->desa->nama_desa}}</th>
+                                                        <th>{{$item->nama_rw}}</th>
+                                                        
                                                         <td>
                                                           
-                                                             <a class="btn btn-outline-success" href="{{route('kota.edit',$item->id)}}"><i class="fas fa-eye">Edit</i></a>
-                                                            <a class="btn btn-outline-danger" href="{{route('kota.delete',$item->id)}}"><i class="fas fa-trash">Hapus</i></a>
+                                                             <a class="btn btn-outline-success" href="{{route('rw.edit',$item->id)}}"><i class="fas fa-eye">Edit</i></a>
+                                                            <a class="btn btn-outline-danger" href="{{route('rw.delete',$item->id)}}"><i class="fas fa-trash">Hapus</i></a>
                                                    
                                                         </td>
                                                     </tr>

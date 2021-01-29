@@ -24,9 +24,9 @@
       @foreach ($kasus as $data)
        <tr>
           <td>{{$no++}}</td>
-          <td>{{$data->nama_kaus}}</td>
+          <td>{{$data->nama_kasus}}</td>
           <td>
-            <form action="{{route('kasus destroy', $data->id)}}" method="post">
+            <form action="{{route('kasus.destroy', $data->id)}}" method="post">
             @method('delete')
             @csrf
              <a href="{{route('kasus.edit', $data->id)}}" class="btn btn-succes">Edit</a>

@@ -12,7 +12,7 @@
        @csrf 
        <div class="form-group">
         <label>Pilih kasus</label>
-        <select name="id_kecamatan" class="form-control">
+        <select name="id_kasus" class="form-control">
         @foreach ($kasus as $item)
              <option value="{{ $item->id }}">{{$item->nama_kasus}}</option>
         @endforeach
@@ -32,3 +32,5 @@
     </div>
   </div>
 @endsection
+
+

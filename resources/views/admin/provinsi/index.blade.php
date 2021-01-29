@@ -22,7 +22,7 @@
                $no=1;
             @endphp
             @foreach ($provinsi as $data)
-               <tr>
+                <tr>
                   <td>{{$no++}}</td>
                   <td>{{$data->kode_provinsi}} </td>
                   <td>{{$data->nama_provinsi}} </td>      
