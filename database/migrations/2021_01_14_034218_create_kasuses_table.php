@@ -14,13 +14,13 @@ class CreateKasusesTable extends Migration
     public function up()
     {
         Schema::create('kasuses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->unsignedInteger('id_rw');
-            $table->foreign('id_rw')->references('id')->
-                    on('rws')->onDelete('cascade');
-            $table->string('positif');
-            $table->string('sembuh');
-            $table->string('meninggal');
+            $table->integer('reaktif');
+            $table->integer('positif');
+            $table->integer('sembuh');
+            $table->integer('meninggal');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }

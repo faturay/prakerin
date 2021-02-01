@@ -5,18 +5,22 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Edit Data Provinsi
+                    Tambah Data datefmt_set_pattern
                 </div>
                 <div class="card-body">
-                    <form action="{{route('provinsi.update',$provinsi->id)}}" method="post">
-                        @csrf @method('put')
+                    <form action="{{route('desa.store')}}" method="post">
+                        @csrf
                         <div class="form-group">
-                            <label for="">Kode Provinsi</label>
-                            <input type="text" name="kode" class="form-control" value="{{$provinsi->kode_provinsi}}" required>
+                            <label for="">Pilih Kecamatan</label>
+                            <select name="id_kecamatan" class="form-control" required>
+                                @foreach($kecamatan as $data)
+                                    <option value="{{$data->id}}">{{$data->nama_kecamatan}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Nama Provinsi</label>
-                            <input type="text" name="nama" class="form-control" value="{{$provinsi->nama_provinsi}}" required>
+                            <label for="">Nama desa</label>
+                            <input type="text" name="nama_desa  " class="form-control" required>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Simpan</button>

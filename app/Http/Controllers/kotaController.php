@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\kota;
+
+use App\Models\Kota;
+use App\Models\Provinsi;
+use App\Http\Controllers\DB;
 use Illuminate\Http\Request;
 
 class KotaController extends Controller
@@ -11,10 +14,15 @@ class KotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $kota = Kota::with('provinsi')->get();
-        return view('admin.kota.index', compact('kota'));
+        return view('admin.kota.index',compact('kota'));
     }
 
     /**
@@ -36,66 +44,79 @@ class KotaController extends Controller
      */
     public function store(Request $request)
     {
-        $kota = new kota();
-        $kota->id_provinsi = $request->id_provinsi;
-        $kota->kode_provinsi = $request->kode_kota;
+        //validasi
+        $request->validate([
+            'kode_kota' => 'required|max:4|unique:kotas',
+            'nama_provinsi' => 'required|unique:kotas',
+        ], [
+            'kode_kota.required' => 'Kode  Wajib Di Isi',
+            'kode_kota.max' => 'Kode Maksimal 4 Nomor',
+            'kode_kota.unique' => 'Kode Sudah Dipakai',
+            'nama_provinsi.required' => 'Nama Provinsi Harus Di Isi ',
+            'nama_provinsi.unique' => 'Kode Sudah Dipakai',
+        ]);
+        $kota= new Kota();
+        $kota->kode_kota = $request->kode_kota;
         $kota->nama_kota = $request->nama_kota;
+        $kota->id_provinsi = $request->id_provinsi;
         $kota->save();
-        return redirect()->route('kota.index')->with(['success'=>'data berhasil disimpan']);
-    
+        return redirect()->route('kota.index')
+            ->with(['message'=>'Data Berhasil Dibuat']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\kasus  $kasus
+     * @param  \App\Models\Kota  $kota
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $kota = kota::findOrFail($id);
+        $kota = Kota::findOrFail($id);
         return view('admin.kota.show',compact('kota'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\kasus  $kasus
+     * @param  \App\Models\Kota  $kota
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+        $provinsi = Provinsi::all();
         $kota = Kota::findOrFail($id);
-        return view('admin.kota.edit',compact('kota','provinsi'))->with(['message' => 'Data Kota Berhasil diedit']);
+        return view('admin.kota.edit',compact('kota','provinsi'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\kasus  $kasus
+     * @param  \App\Models\Kota  $kota
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $id)
     {
         $kota = Kota::findOrFail($id);
-        $kota->id_provinsi = $request->id_provinsi;
         $kota->kode_kota = $request->kode_kota;
         $kota->nama_kota = $request->nama_kota;
+        $kota->id_provinsi = $request->id_provinsi;
         $kota->save();
-        return redirect()->route('kota.index')->with(['message'=>'Data Berhasil disimpan']);        
+        return redirect()->route('kota.index')
+            ->with(['message'=>'Data Berhasil Diedit']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\kasus  $kasus
+     * @param  \App\Models\Kota  $kota
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $kota = Kota::findOrFail($id);
-       $kota->delete();
-        return redirect()->route('kota.index')->with(['message' => 'Data Kota Berhasil dihapus']);
+        $kota = Kota::findOrFail($id)->delete();
+        return redirect()->route('kota.index')
+                        ->with(['message1'=>'Data Berhasil Dihapus']);
     }
 }

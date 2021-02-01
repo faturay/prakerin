@@ -19,7 +19,7 @@ active
                                       
                                         <select name="id_desa" id="" class="form-control" name="id_desa[]">
                                             @foreach ($desa as $item)
-                                                <option value="{{$item->id}}" {{$item->id==$item->id_kelurahan ? 'selected' : ''}} >{{$item->nama_desa}}</option>
+                                                <option value="{{$item->id}}" {{$item->id==$item->id_desa ? 'selected' : ''}} >{{$item->nama_desa}}</option>
                                             @endforeach
                                         </select>
                                     </div>
