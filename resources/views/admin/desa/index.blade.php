@@ -1,65 +1,47 @@
 @extends('layouts.admin')
-@push('desa')
-active
-@endpush
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-             
-
+                <div class="card-header">
+                    Data desa
+                    <a href="{{route('desa.create')}}"
+                       class="btn btn-primary float-right">
+                        Tambah
+                    </a>
+                </div>
                 <div class="card-body">
-                    @if (session('succes'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('succes') }}
-                        </div>
-                    @endif
-
-                    <div class="card">
-                        <div class="card-header">Desa
-                                <a href="{{route('desa.create')}}" class="float-right btn btn-primary"> Tambah </a>
-                        </div>   
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Nama Kecamatan</th>
-                                                        <th>Nama Desa</th>
-                                                        <th>
-                                                            <center>
-                                                                Action
-                                                            </center>
-                                                        </th>
-                                                    </tr>
-                                                    
-                                                </thead>
-                                                <tbody>
-                                                    @php $no = 1; @endphp
-                                                    @foreach ($desa as $item)
-                                                    <tr>
-                                                        <th >{{$no++}}</th>
-                                                        <th>{{$item->Kecamatan->nama_kecamatan}}</th>
-                                                        <th>{{$item->nama_desa}}</th>
-                                                        
-                                                        <td>
-                                                          
-                                                             <a class="btn btn-outline-success" href="{{route('desa.edit',$item->id)}}"><i class="fas fa-eye">Edit</i></a>
-                                                            <a class="btn btn-outline-danger" href="{{route('desa.delete',$item->id)}}"><i class="fas fa-trash">Hapus</i></a>
-                                                   
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table" id="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>desa</th>
+                                    <th>Kecamatan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $no=1; @endphp
+                                @foreach($desa as $data)
+                                <tr>
+                                    <td>{{$no++}}</td>
+                                    <td>{{$data->nama_desa}}</td>
+                                    <td>{{$data->kecamatan->nama_kecamatan}}</td>
+                                    <td>
+                                        <form action="{{route('desa.destroy',$data->id)}}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <a href="{{route('desa.edit',$data->id)}}" class="btn btn-success">Edit</a>
+                                            <a href="{{route('desa.show',$data->id)}}" class="btn btn-warning">Show</a>
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin ?')">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

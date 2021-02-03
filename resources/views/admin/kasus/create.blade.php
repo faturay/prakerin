@@ -1,50 +1,53 @@
 @extends('layouts.admin')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
-                <div class="card-header">
-                    Data kasus
-                </div>
+                <div class="card-header"><center><b>{{ __('Data Kasus Local') }}</b></center></div>
+
                 <div class="card-body">
-                    <form action="{{route('kasus.store')}}" method="post">
-                        @csrf
-                        <div class="row">
-                            <div class="col">
-                                @livewire('dropdowns')
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="">Reaktif</label>
-                                    <input type="text" name="reaktif" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">positif</label>
-                                    <input type="text" name="positif" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">sembuh</label>
-                                    <input type="text" name="sembuh" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">meninggal</label>
-                                    <input type="text" name="meninggal" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">tanggal</label>
-                                    <input type="date" name="tanggal" class="form-control" required>
-                                </div>
-                            </div>
+                <form action="{{route('kasus.store')}}" method="POST">
+                @csrf
+    @livewireStyles
+                        @livewire('Dropdowns')
+    @livewireScripts
+
+                 
+
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Simpan</button>
-                        </div>
-                    </form>
+                    @endif
+                    
+                
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumlah Reaktif</label>
+                        <input type="number" name="jumlah_reaktif" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumlah Positif</label>
+                        <input type="number" name="jumlah_positif" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumlah Meninggal</label>
+                        <input type="number" name="jumlah_meninggal" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumlah Sembuh</label>
+                        <input type="number" name="jumlah_sembuh" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Tanggal</label>
+                        <input type="date" name="tanggal" class="form-control" id="">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
-

@@ -8,7 +8,7 @@ use App\Models\kota;
 use App\Models\kecamatan;
 use App\Models\desa;
 use App\Models\Rw;
-use App\Models\Kasus;
+use App\Models\Kasus2;
 
 class Statecity extends Component
 {
@@ -71,7 +71,7 @@ class Statecity extends Component
     public function updatedSelectedState5($rw)
     {
         if (!is_null($rw)) {
-            $this->Kasus = Kasus::where('id_rw', $rw)->get();
+            $this->kasus2 = Kasus2::where('id_rw', $rw)->get();
         }
     }
 }

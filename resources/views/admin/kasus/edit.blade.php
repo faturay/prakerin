@@ -1,52 +1,52 @@
 @extends('layouts.admin')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
-                <div class="card-header">
-                    Data kasus
-                </div>
+                <div class="card-header"><center><b>{{ __('Data Kasus Local') }}</b></center></div>
+
                 <div class="card-body">
-                    <form action="{{route('kasus.update',$kasus->id)}}" method="post">
-                        @csrf @method('put')
-                        <div class="row">
-                            <div class="col">
-                                @livewire('dropdowns',['selectedRw'=>$kasus->id_rw,'selecteddesa'=>$kasus->rw->id_desa,
-                                            'selectedKecamatan'=>$kasus->rw->desa->id_kecamatan,
-                                            'selectedKota'=>$kasus->rw->desa->kecamatan->id_kota,
-                                            'selectedProvinsi'=>$kasus->rw->desa->kecamatan->kota->id_provinsi])
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="">Reaktif</label>
-                                    <input type="text" name="reaktif" class="form-control" value="{{$kasus->reaktif}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">positif</label>
-                                    <input type="text" name="positif" class="form-control" value="{{$kasus->positif}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">sembuh</label>
-                                    <input type="text" name="sembuh" class="form-control" value="{{$kasus->sembuh}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">meninggal</label>
-                                    <input type="text" name="meninggal" class="form-control" value="{{$kasus->meninggal}}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">tanggal</label>
-                                    <input type="date" name="tanggal" class="form-control" value="{{$kasus->tanggal}}" required>
-                                </div>
-                            </div>
+                <form action="{{route('kasus.update', $kasus->id)}}" method="POST">
+                 <input type="hidden" name="_method" value="PUT">
+                @csrf
+
+                @livewireStyles
+                        @livewire('Dropdowns')
+    @livewireScripts
+
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Simpan</button>
-                        </div>
-                    </form>
+                    @endif
+            
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumalah Reaktif</label>
+                        <input type="number" name="jumlah_reaktif"  value="{{$kasus->jumlah_reaktif}}" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumalah Positif</label>
+                        <input type="number" name="jumlah_positif"  value="{{$kasus->jumlah_positif}}" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumalah Meninggal</label>
+                        <input type="number" name="jumlah_meninggal"  value="{{$kasus->jumlah_meninggal}}" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Jumalah Sembuh</label>
+                        <input type="number" name="jumlah_sembuh"  value="{{$kasus->jumlah_sembuh}}" class="form-control" id="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Tanggal</label>
+                        <input type="date" name="tanggal"  value="{{$kasus->tanggal}}" class="form-control" id="">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
+@endsectio

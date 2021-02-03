@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    Tambah Data datefmt_set_pattern
+                    Tambah Data desa
                 </div>
                 <div class="card-body">
                     <form action="{{route('desa.store')}}" method="post">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Nama desa</label>
-                            <input type="text" name="nama_desa  " class="form-control" required>
+                            <input type="text" name="nama_desa" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Simpan</button>
