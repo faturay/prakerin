@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    halo
+                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>

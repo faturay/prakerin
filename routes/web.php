@@ -1,27 +1,43 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProvinsiController;
-use App\Http\Controllers\KotaController;
-use App\Http\Controllers\KecamatanController;
-use App\Http\Controllers\KelurahanController;
-use App\Http\Controllers\RwController;
-use App\Http\Controllers\KasusController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::get('dashboard',function () {
+    return view('layouts.master');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'admin','middleware'=>['auth']], function () {
-    Route::resource('provinsi', ProvinsiController::class);
-    Route::resource('kota', KotaController::class);
-    Route::resource('kecamatan', KecamatanController::class);
-    Route::resource('kelurahan', KelurahanController::class);
-    Route::resource('rw', RwController::class);
-    Route::resource('kasus', KasusController::class);
+use App\Http\Controllers\ProvinsiController;
+Route::resource('provinsi', ProvinsiController::class);
 
-});
+use App\Http\Controllers\KotaController;
+Route::resource('kota', KotaController::class);
+
+use App\Http\Controllers\KecamatanController;
+Route::resource('kecamatan', KecamatanController::class);
+
+use App\Http\Controllers\KelurahanController;
+Route::resource('kelurahan', KelurahanController::class);
+
+use App\Http\Controllers\RwController;
+Route::resource('rw', RwController::class);
+
+use App\Http\Controllers\Kasus2Controller;
+Route::resource('kasus2', Kasus2Controller::class);
+
+use App\Http\Controllers\KasusController;
+Route::resource('kasus', KasusController::class);
+
+// livewire
+
+Route::view('states-city','livewire.home');

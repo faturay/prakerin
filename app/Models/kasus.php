@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class kasus extends Model
 {
-    public function rw(){
-        return $this->belongsTo('app\Model\id_rw');
+    protected $fillable = ['jumlah_positif','jumlah_meninggal', 'jumlah_sembu', 'tgl','id_negara'];
+    public $timestamps = true;
+
+    public function Negara(){
+        return $this->belongsTo('App\Models\Negara','id_negara');
     }
 }

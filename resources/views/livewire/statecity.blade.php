@@ -19,8 +19,8 @@
             <div class="col-md-6">
                 <select wire:model="selectedState2" class="form-control" name="id_kota">
                     <option value="" selected>Pilih Kota</option>
-                    @foreach($kota as $data)
-                        <option value="{{ $data2->id }}">{{ $data->nama_kota }}</option>
+                    @foreach($kota as $data2)
+                        <option value="{{ $data2->id }}">{{ $data2->nama_kota }}</option>
                     @endforeach
                 </select>
             </div>
@@ -42,13 +42,13 @@
     @endif
     @if (!is_null($selectedState3))
         <div class="form-group row">
-            <label for="desa" class="col-md-4 col-form-label text-md-right">desa</label>
+            <label for="kelurahan" class="col-md-4 col-form-label text-md-right">Kelurahan</label>
 
             <div class="col-md-6">
-                <select wire:model="selectedState4" class="form-control" name="id_desa">
-                    <option value="" selected>Pilih desa</option>
-                    @foreach($desa as $data4)
-                        <option value="{{ $data4->id }}">{{ $data4->nama_desa }}</option>
+                <select wire:model="selectedState4" class="form-control" name="id_kelurahan">
+                    <option value="" selected>Pilih Kelurahan</option>
+                    @foreach($kelurahan as $data4)
+                        <option value="{{ $data4->id }}">{{ $data4->nama_kelurahan }}</option>
                     @endforeach
                 </select>
             </div>
@@ -62,10 +62,14 @@
                 <select wire:model="selectedState5" class="form-control" name="id_rw">
                     <option value="" selected>Pilih Rw</option>
                     @foreach($rw as $data5)
-                        <option value="{{ $data5->id }}">{{ $data5->nama_rw}}</option>
+                        <option value="{{ $data5->id }}">{{ $data5->nama}}</option>
                     @endforeach
                 </select>
             </div>
         </div>
     @endif
+
+
+
+
 </div>

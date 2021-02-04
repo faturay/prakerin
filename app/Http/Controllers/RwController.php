@@ -1,62 +1,58 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Controllers\DB;
+use App\Models\Kelurahan;
 use App\Models\Rw;
-use App\Models\desa;
 use Illuminate\Http\Request;
 
 class RwController extends Controller
 {
     public function index()
     {
-        $rw = rw::with('desa')->get();
-        return view('admin.rw.index',compact('rw'));
+ 	   $rw = Rw::with('kelurahan')->get();
+        return view('rw.index', compact('rw'));
     }
-
     public function create()
     {
-        $desa = desa::all();
-        return view('admin.rw.create',compact('desa'));
+        $kelurahan = Kelurahan::all();
+        return view ('rw.create', compact('kelurahan'));
     }
-
     public function store(Request $request)
     {
-        $rw = new rw();
-        $rw->id_desa = $request->id_desa;
-        $rw->nama_rw = $request->nama_rw;
-        $rw->save();
-        return redirect()->route('rw.index')->with(['success'=>'data berhasil disimpan']);
-    }
 
+    
+
+        $rw = new Rw;
+        $rw->id_kelurahan = $request->id_kelurahan;
+        $rw->nama = $request->nama;
+        $rw->save();
+        return redirect()->route('rw.index')->with(['message' => 'Data Rw Berhasil disimpan']);
+    }
     public function show($id)
     {
-        $rw = rw::findOrFail($id);
-        return view('admin.rw.show',compact('rw'));
+        $rw = Rw::findOrFail($id);
+        return view('rw.show', compact('rw'));
     }
-
-
     public function edit($id)
     {
-        $desa = desa::all();
-        $rw = rw::findOrFail($id);
-        return view('admin.rw.edit',compact('rw','desa'));
+        $rw = Rw::findOrFail($id);
+        $kelurahan = Kelurahan::all();
+        return view('rw.edit', compact('rw', 'kelurahan'))->with(['message' => 'Data Rw Berhasil diedit']);
     }
-
-
     public function update(Request $request, $id)
     {
-        $rw = rw::findOrFail($id);
-        $rw->id_desa = $request->id_desa;
-        $rw->nama_rw = $request->nama_rw;
+        $rw = Rw::findOrFail($id);
+        $rw->id_kelurahan = $request->id_kelurahan;
+        $rw->nama = $request->nama;
         $rw->save();
-        return redirect()->route('rw.index')->with(['success'=>'data berhasil di edit']);
+        return redirect()->route('rw.index')->with(['message' => 'Data Rw Berhasil disimpan']);
     }
 
     public function destroy($id)
     {
-        $rw = rw::findOrFail($id);
+        $rw = Rw::findOrFail($id);
         $rw->delete();
-        return redirect()->route('rw.index')->with(['success'=>'data berhasil di hapus']);
+        return redirect()->route('rw.index')->with(['message' => 'Data Rw Berhasil diHapus']);
     }
 }

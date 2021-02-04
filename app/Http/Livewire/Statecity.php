@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Provinsi;
 use App\Models\kota;
 use App\Models\kecamatan;
-use App\Models\desa;
+use App\Models\kelurahan;
 use App\Models\Rw;
 use App\Models\Kasus2;
 
@@ -15,7 +15,7 @@ class Statecity extends Component
     public $provinsi;
     public $kota;
     public $kecamatan;
-    public $desa;
+    public $kelurahan;
     public $rw;
  
 
@@ -31,7 +31,7 @@ class Statecity extends Component
         $this->provinsi = Provinsi::all();
         $this->kota = collect();
         $this->kecamatan = collect();
-        $this->desa = collect();
+        $this->kelurahan = collect();
         $this->rw = collect();
     }
 
@@ -57,14 +57,14 @@ class Statecity extends Component
     public function updatedSelectedState3($kecamatan)
     {
         if (!is_null($kecamatan)) {
-            $this->desa = desa::where('id_kecamatan', $kecamatan)->get();
+            $this->kelurahan = Kelurahan::where('id_kecamatan', $kecamatan)->get();
         }
     }
 
-    public function updatedSelectedState4($desa)
+    public function updatedSelectedState4($kelurahan)
     {
-        if (!is_null($desa)) {
-            $this->rw = Rw::where('id_desa', $desa)->get();
+        if (!is_null($kelurahan)) {
+            $this->rw = Rw::where('id_kelurahan', $kelurahan)->get();
         }
     }
 

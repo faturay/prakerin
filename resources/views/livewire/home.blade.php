@@ -1,3 +1,4 @@
+
 <html>
 <head>
     <title>Laravel Livewire Dependant Dropdown - NiceSnippets.com</title>
@@ -22,4 +23,4 @@
     </div>
     @livewireScripts
 </body>
-</html> 
+</html>
